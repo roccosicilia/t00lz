@@ -1,3 +1,1 @@
-# Cyber Security Papers
-# Author: Rocco Sicilia
-
+# Public Papers and Proof of Concept
