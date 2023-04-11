@@ -14,7 +14,7 @@ mode =      sys.argv[2]
 ### function def
 def tabber(string):
     string_len = len(string)
-    empty = 100 - string_len
+    empty = 50 - string_len
     tab = '-'*empty
     return tab
 
