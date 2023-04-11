@@ -12,4 +12,4 @@ mode =      sys.argv[2]
 
 if "amass" in mode:   # search subdomain via DuckDuckGo
     result = subprocess.check_output(["amass", "enum", "-passive", "-d", domain])
-    print(result)
+    print(result.decode("utf-8"))
