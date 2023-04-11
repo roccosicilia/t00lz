@@ -30,7 +30,7 @@ if "amass" in mode:   # search subdomain via DuckDuckGo
             subdomain_ip = socket.gethostbyname(subdomain)
             subdomain_str = subdomain.decode("utf-8")
             tab = tabber(subdomain_str)
-            print("| {} {} | {} \t|".format(subdomain_str, tab, subdomain_ip))
+            print("| {} {} | {}\t|".format(subdomain_str, tab, subdomain_ip))
 
         except:
 
