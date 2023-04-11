@@ -14,12 +14,8 @@ mode =      sys.argv[2]
 ### function def
 def tabber(string):
     string_len = len(string)
-    if string_len >= 30:
-        tab = '\t'
-    elif string_len > 20 and string_len < 30:
-        tab = '\t\t'
-    else:
-        tab = '\t'
+    empty = 100 - string_len
+    tab = '-'*empty
     return tab
 
 ### main program -- anass utility
@@ -34,10 +30,10 @@ if "amass" in mode:   # search subdomain via DuckDuckGo
             subdomain_ip = socket.gethostbyname(subdomain)
             subdomain_str = subdomain.decode("utf-8")
             tab = tabber(subdomain_str)
-            print("| {}{}| {}\t|".format(subdomain_str, tab, subdomain_ip))
+            print("| {} {} | {} \t|".format(subdomain_str, tab, subdomain_ip))
 
         except:
 
             subdomain_str = subdomain.decode("utf-8")
             tab = tabber(subdomain_str)
-            print("| {}{}]| n/a\t|".format(subdomain_str, tab))
+            print("| {} {} | n/a \t\t|".format(subdomain_str, tab))
