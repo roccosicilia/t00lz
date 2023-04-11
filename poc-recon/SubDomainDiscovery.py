@@ -7,6 +7,7 @@ import sys
 import subprocess
 import socket
 import json
+from shodan import Shodan
 
 domain = sys.argv[1]
 mode = sys.argv[2]
@@ -48,9 +49,8 @@ if "amass" in mode:   # search subdomain via DuckDuckGo
         print("# Get Shodan info for {subdomain}")
         try:
 
-            shodan_string = "https://api.shodan.io/shodan/host/{subdomain_ip}?key={shodan_key}"
-            shodan_info = requests.get(shodan_string)
-            shodan_json = json.loads(shodan_info)
+            shodan = Shodan("{}".format(shodan_key))
+            shodan_json = shodan.host("{}".format(subdomain_ip))
             ports = shodan_json["ports"]
             output = output + " {} |".format(ports)
 
