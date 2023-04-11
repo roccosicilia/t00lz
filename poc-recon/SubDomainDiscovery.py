@@ -19,6 +19,8 @@ if "amass" in mode:   # search subdomain via DuckDuckGo
     subdomains = result.splitlines()
 
     for subdomain in subdomains:
-        subdomain_ip = socket.gethostbyname(subdomain)
-        print("| {}\t| {}\t|".format(subdomain, subdomain_ip))
-        
+        try:
+            subdomain_ip = socket.gethostbyname(subdomain)
+            print("| {}\t| {}\t|".format(subdomain, subdomain_ip))
+        except:
+            print("| {}\t| n/a\t|".format(subdomain))
