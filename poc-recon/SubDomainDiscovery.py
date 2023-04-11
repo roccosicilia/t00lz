@@ -28,6 +28,7 @@ if "amass" in mode:   # search subdomain via DuckDuckGo
     for subdomain in subdomains:
 
         # gat domain info
+        print("# Get domain info for {subdomain}")
         try:
 
             subdomain_ip = socket.gethostbyname(subdomain)
@@ -44,9 +45,11 @@ if "amass" in mode:   # search subdomain via DuckDuckGo
             output = "| {} {} | n/a \t\t|".format(subdomain_str, tab)
         
         # get shodan info
+        print("# Get Shodan info for {subdomain}")
         try:
 
-            shodan_info = requests.get("https://api.shodan.io/shodan/host/{}?key={}".format(subdomain_ip, shodan_key))
+            shodan_string = "https://api.shodan.io/shodan/host/{subdomain_ip}?key={shodan_key}"
+            shodan_info = requests.get(shodan_string)
             shodan_json = json.loads(shodan_info)
             ports = shodan_json["ports"]
             output = output + " {} |".format(ports)
@@ -56,4 +59,3 @@ if "amass" in mode:   # search subdomain via DuckDuckGo
             output = output + " n/a | "
         
         print(output)
-        
