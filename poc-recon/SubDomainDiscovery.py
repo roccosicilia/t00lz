@@ -54,3 +54,6 @@ if "amass" in mode:   # search subdomain via DuckDuckGo
         except:
 
             output = output + " n/a | "
+        
+        print(output)
+        
