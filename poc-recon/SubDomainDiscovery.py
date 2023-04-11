@@ -35,5 +35,7 @@ if "amass" in mode:   # search subdomain via DuckDuckGo
             print("| {}{}]| {}\t|".format(subdomain_str, tab, subdomain_ip))
 
         except:
-
+            
+            subdomain_str = subdomain.decode("utf-8")
+            tab = tabber(subdomain_str)
             print("| {}{}]| n/a\t|".format(subdomain_str, tab))
