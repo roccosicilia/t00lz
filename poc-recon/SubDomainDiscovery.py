@@ -11,8 +11,16 @@ domain =    sys.argv[1]
 mode =      sys.argv[2]
 #output =    sys.argv[3]
 
-print
+### function def
+def tabber(string):
+    string_len = string.count()
+    if string_len < 20:
+        tab = '\t\t'
+    else:
+        tab = '\t'
+    return tab
 
+### main program -- anass utility
 if "amass" in mode:   # search subdomain via DuckDuckGo
     result = subprocess.check_output(["amass", "enum", "-passive", "-d", domain])
     #print(result.decode("utf-8"))
@@ -20,7 +28,12 @@ if "amass" in mode:   # search subdomain via DuckDuckGo
 
     for subdomain in subdomains:
         try:
+
             subdomain_ip = socket.gethostbyname(subdomain)
-            print("| {}\t| {}\t|".format(subdomain, subdomain_ip))
+            subdomain_str = subdomain.decode("utf-8")
+            tab = tabber(subdomain_str)
+            print("| {}{}]| {}\t|".format(subdomain_str, tab, subdomain_ip))
+
         except:
-            print("| {}\t| n/a\t|".format(subdomain))
+
+            print("| {}{}]| n/a\t|".format(subdomain_str, tab))
