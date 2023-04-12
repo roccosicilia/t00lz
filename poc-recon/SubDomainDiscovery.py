@@ -63,6 +63,6 @@ if "amass" in mode:   # search subdomain via DuckDuckGo
         i = i + 1
 
 ### print the content ###
-print("#"*50)
-print(content)
-
+print("\n\n{}".format("#"*50))
+for element in content.values():
+    print(element)
