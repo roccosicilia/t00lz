@@ -80,9 +80,12 @@ if "amass" in mode:   # search subdomain via DuckDuckGo
 
             shodan_ports = shodan_json["ports"]
             ports = shodan_ports[:5]
-            ports_tab = tabber25(ports)
+            portlist = ''
+            for port in ports:
+                portlist += "{} ".format(port)
+            ports_tab = tabber25(portlist)
 
-            output = output + " {} {} | {} {} | {} {} |".format(asn, asn_tab, org, org_tab, ports, ports_tab)
+            output = output + " {} {} | {} {} | {} {} |".format(asn, asn_tab, org, org_tab, portlist, ports_tab)
             
             content[i] = output
             i = i + 1
