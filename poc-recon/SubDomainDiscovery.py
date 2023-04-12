@@ -49,8 +49,8 @@ if "amass" in mode:   # search subdomain via DuckDuckGo
         print("# Get Shodan info for {subdomain}")
         try:
 
-            shodan = Shodan("{}".format(shodan_key))
-            shodan_json = shodan.host("{}".format(subdomain_ip))
+            shodan_result = subprocess.check_output(["curl", "-X", "GET", subdomain_ip])
+            shodan_json = json.load(shodan_result)
             ports = shodan_json["ports"]
             output = output + " {} |".format(ports)
 
