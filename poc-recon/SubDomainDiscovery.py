@@ -13,7 +13,7 @@ if len(sys.argv) < 4:
     print("Usage: python ./{} DomainName Mode ShodanKey [flags]".format(sys.argv[0]))
     print("Available Mode: amass")
     print("Flags:\n \
-          \t -i: check ICMP responce for the host\n \
+          \t -i: check ICMP response for the host\n \
           \t -w: check web content for the host\n")
     sys.exit()
 
@@ -61,11 +61,20 @@ if "amass" in mode:   # search subdomain via DuckDuckGo
         print("# Get domain info for {}".format(subdomain))
         try:
 
+            # get IP from subdomain
             subdomain_ip = socket.gethostbyname(subdomain)
             subdomain_str = subdomain.decode("utf-8")
             tab = tabber50(subdomain_str)
+
+            # check ICMP
+            r_ping = subprocess.run(['ping', '-c', '1', subdomain_ip], capture_output=True)
+            if result.returncode == 0:
+                color = '31m'
+            else:
+                color = '32m'
+
             # print("| {} {} | {}\t|".format(subdomain_str, tab, subdomain_ip))
-            output = "| {} {} | {}\t|".format(subdomain_str, tab, subdomain_ip)
+            output = "| {} {} | " + '\033[{}' + "{}" + '\033[0m' + "\t|".format(subdomain_str, tab, color, subdomain_ip)
 
         except:
 
