@@ -51,8 +51,7 @@ if "amass" in mode:   # search subdomain via DuckDuckGo
         print("### DEBUG ### {}".format(shodan_query))
         shodan_result = subprocess.check_output(["curl", "-X", "GET", shodan_query])
         print("### DEBUG ### {}".format(shodan_result))
-        shodan_json = json.load(shodan_result)
-        ports = shodan_json["ports"]
+        ports = shodan_result["ports"]
         output = output + " {} |".format(ports)
         
         print(output)
