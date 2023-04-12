@@ -14,7 +14,8 @@ if len(sys.argv) < 4:
     print("Available Mode: amass")
     print("Flags:\n \
           \t -b: brute forcing domain\n \
-          \t -i: check for alive hosts (ICMP)\n")
+          \t -i: check for alive hosts (ICMP)\n \
+          \t -D: search PDF by Dorks")
     sys.exit()
 
 domain = sys.argv[1]
@@ -125,16 +126,22 @@ print("{}".format("#"*150))
 ### print the content ###
 if option != None:
     print("\n\n{}\n".format("#"*150))
-    print(" -- Details for alive host\n")
+    print(" -- Details --")
 
     # check for ICMP response
     if 'i' in option:
+        print("\n")
         hostalive = []
         for host in iplist:
             r_ping = subprocess.run(['ping', '-c', '4', host], capture_output=True)
             if r_ping.returncode == 0:
                 hostalive.append(host)
         print("List of alive host: {}".format(hostalive))
+    
+    # check for PDF
+    if 'D' in option:
+        print("\n")
+        print("List of PDF for domains")
 
 else:
     print("\n\n{}".format("#"*150))
