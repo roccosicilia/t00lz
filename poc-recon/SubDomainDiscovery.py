@@ -37,7 +37,7 @@ if "amass" in mode:   # search subdomain via DuckDuckGo
     #print(result.decode("utf-8"))
     subdomains = result.splitlines()
 
-    content = []
+    content = {}
     i = 0
     for subdomain in subdomains:
 
