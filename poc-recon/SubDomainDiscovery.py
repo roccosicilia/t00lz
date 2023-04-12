@@ -83,6 +83,7 @@ if "amass" in mode:   # search subdomain via DuckDuckGo
         except:
 
             content[i] = output
+            i = i + 1
 
 ### print the content ###
 print("\n\n{}".format("#"*50))
