@@ -8,6 +8,15 @@ import subprocess
 import socket
 import json
 
+### mode and flag management
+if len(sys.argv) < 4:
+    print("Usage: python ./{} DomainName Mode ShodanKey [flags]".format(sys.argv[0]))
+    print("Available Mode: amass")
+    print("Flags:\n \
+          \t -i: check ICMP responce for the host\n \
+          \t -w: check web content for the host\n")
+    sys.exit()
+
 domain = sys.argv[1]
 mode = sys.argv[2]
 shodan_key = sys.argv[3]
