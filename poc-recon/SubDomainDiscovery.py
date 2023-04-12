@@ -72,6 +72,7 @@ if "amass" in mode:   # search subdomain via DuckDuckGo
             shodan_json = json.loads(shodan_result.decode("utf-8"))
 
             org = shodan_json["org"]
+            org = org[:15]
             org_tab = tabber15(org)
             
             asn = shodan_json["asn"]
