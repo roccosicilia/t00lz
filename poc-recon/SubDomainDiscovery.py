@@ -1,5 +1,5 @@
 '''
-Usege:  SubDomainDiscovery --domain contoso.hack --mode amass
+Usege amass mode:  SubDomainDiscovery.py amass ShodanKey 
 '''
 
 import requests
@@ -7,7 +7,6 @@ import sys
 import subprocess
 import socket
 import json
-from shodan import Shodan
 
 domain = sys.argv[1]
 mode = sys.argv[2]
@@ -38,7 +37,7 @@ if "amass" in mode:   # search subdomain via DuckDuckGo
     #print(result.decode("utf-8"))
     subdomains = result.splitlines()
 
-    content = {}
+    content = []
     i = 0
     for subdomain in subdomains:
 
