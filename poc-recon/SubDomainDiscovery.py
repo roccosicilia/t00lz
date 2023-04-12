@@ -48,10 +48,13 @@ if "amass" in mode:   # search subdomain via DuckDuckGo
         # get shodan info
         print("# Get Shodan info for {}".format(subdomain))
         shodan_query = "https://api.shodan.io/shodan/host/{}?key={}".format(subdomain_ip, shodan_key)
-        print("### DEBUG ### {}".format(shodan_query))
+        #print("### DEBUG ### {}".format(shodan_query))
+
         shodan_result = subprocess.check_output(["curl", "-X", "GET", shodan_query])
-        print("### DEBUG ### {}".format(shodan_result))
-        ports = shodan_result["ports"]
+        #print("### DEBUG ### {}".format(shodan_result))
+
+        shodan_json = json.loads(shodan_result.decode("utf-8"))
+        ports = shodan_json["ports"]
         output = output + " {} |".format(ports)
         
         print(output)
