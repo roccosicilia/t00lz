@@ -26,6 +26,12 @@ def tabber25(string):
     tab = '-'*empty
     return tab
 
+def tabber15(string):
+    string_len = len(string)
+    empty = 15 - string_len
+    tab = '-'*empty
+    return tab
+
 ### main program -- anass utility
 if "amass" in mode:   # search subdomain via DuckDuckGo
     result = subprocess.check_output(["amass", "enum", "-passive", "-d", domain])
@@ -66,10 +72,10 @@ if "amass" in mode:   # search subdomain via DuckDuckGo
         shodan_json = json.loads(shodan_result.decode("utf-8"))
 
         org = shodan_json["org"]
-        org_tab = tabber25(org)
+        org_tab = tabber15(org)
         
         asn = shodan_json["asn"]
-        asn_tab = tabber25(asn)
+        asn_tab = tabber15(asn)
 
         shodan_ports = shodan_json["ports"]
         ports = shodan_ports[:5]
