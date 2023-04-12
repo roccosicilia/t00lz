@@ -72,7 +72,7 @@ if "amass" in mode:   # search subdomain via DuckDuckGo
         asn_tab = tabber25(asn)
 
         shodan_ports = shodan_json["ports"]
-        ports = ", ".join(shodan_ports[:5])
+        ports = shodan_ports[:5]
         ports_tab = tabber25(ports)
 
         output = output + " {} {} | {} {} | {} {} |".format(asn, asn_tab, org, org_tab, ports, ports_tab)
