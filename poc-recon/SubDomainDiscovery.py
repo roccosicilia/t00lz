@@ -26,6 +26,8 @@ if "amass" in mode:   # search subdomain via DuckDuckGo
     #print(result.decode("utf-8"))
     subdomains = result.splitlines()
 
+    content = {}
+    i = 0
     for subdomain in subdomains:
 
         # gat domain info
@@ -57,4 +59,10 @@ if "amass" in mode:   # search subdomain via DuckDuckGo
         ports = shodan_json["ports"]
         output = output + " {} |".format(ports)
         
-        print(output)
+        content[i] = output
+
+
+### print the content ###
+for row in content:
+    print(row)
+
