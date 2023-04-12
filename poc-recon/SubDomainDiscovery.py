@@ -61,35 +61,35 @@ if "amass" in mode:   # search subdomain via DuckDuckGo
         
         # get shodan info
         print("# Get Shodan info for {}".format(subdomain))
-        #try:
+        try:
 
-        shodan_query = "https://api.shodan.io/shodan/host/{}?key={}".format(subdomain_ip, shodan_key)
-        #print("### DEBUG ### {}".format(shodan_query))
+            shodan_query = "https://api.shodan.io/shodan/host/{}?key={}".format(subdomain_ip, shodan_key)
+            #print("### DEBUG ### {}".format(shodan_query))
 
-        shodan_result = subprocess.check_output(["curl", "-X", "GET", shodan_query])
-        #print("### DEBUG ### {}".format(shodan_result))
+            shodan_result = subprocess.check_output(["curl", "-X", "GET", shodan_query])
+            #print("### DEBUG ### {}".format(shodan_result))
 
-        shodan_json = json.loads(shodan_result.decode("utf-8"))
+            shodan_json = json.loads(shodan_result.decode("utf-8"))
 
-        org = shodan_json["org"]
-        org_tab = tabber15(org)
+            org = shodan_json["org"]
+            org_tab = tabber15(org)
+            
+            asn = shodan_json["asn"]
+            asn_tab = tabber15(asn)
+
+            shodan_ports = shodan_json["ports"]
+            ports = shodan_ports[:5]
+            ports_tab = tabber25(ports)
+
+            output = output + " {} {} | {} {} | {} {} |".format(asn, asn_tab, org, org_tab, ports, ports_tab)
+            
+            content[i] = output
+            i = i + 1
         
-        asn = shodan_json["asn"]
-        asn_tab = tabber15(asn)
+        except:
 
-        shodan_ports = shodan_json["ports"]
-        ports = shodan_ports[:5]
-        ports_tab = tabber25(ports)
-
-        output = output + " {} {} | {} {} | {} {} |".format(asn, asn_tab, org, org_tab, ports, ports_tab)
-        
-        content[i] = output
-        i = i + 1
-        
-        #except:
-
-            #content[i] = output
-            #i = i + 1
+            content[i] = output
+            i = i + 1
 
 ### print the content ###
 print("\n\n{}".format("#"*50))
