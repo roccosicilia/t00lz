@@ -13,8 +13,8 @@ if len(sys.argv) < 4:
     print("Usage: python ./{} DomainName Mode ShodanKey [flags]".format(sys.argv[0]))
     print("Available Mode: amass")
     print("Flags:\n \
-          \t -i: check ICMP response for the host\n \
-          \t -w: check web content for the host\n")
+          \t -b: brute forcing domain\n \
+          \t -i: check for alive hosts (ICMP)\n")
     sys.exit()
 
 domain = sys.argv[1]
@@ -52,6 +52,8 @@ if "amass" in mode:   # search subdomain via DuckDuckGo
 
     content = {}
     i = 0
+    iplist = []
+    domainlist = []
     for subdomain in subdomains:
 
         # preset
@@ -66,15 +68,10 @@ if "amass" in mode:   # search subdomain via DuckDuckGo
             subdomain_str = subdomain.decode("utf-8")
             tab = tabber50(subdomain_str)
 
-            # check ICMP
-            r_ping = subprocess.run(['ping', '-c', '1', subdomain_ip], capture_output=True)
-            if result.returncode == 0:
-                color = '31m'
-            else:
-                color = '32m'
-
             # print("| {} {} | {}\t|".format(subdomain_str, tab, subdomain_ip))
-            output = "| {} {} | " + '\033[{}' + "{}" + '\033[0m' + "\t|".format(subdomain_str, tab, color, subdomain_ip)
+            output = "| {} {} | {}\t|".format(subdomain_str, tab, subdomain_ip)
+            iplist.append(subdomain_ip)
+            domainlist.append(subdomain_str)
 
         except:
 
@@ -127,7 +124,17 @@ print("{}".format("#"*150))
 
 ### print the content ###
 if option != None:
-    print("\n\n{}".format("#"*150))
-    print(option)
+    print("\n\n{}\n".format("#"*150))
+    print(" -- Details for alive host\n")
+
+    # check for ICMP response
+    if 'i' in option:
+        hostalive = []
+        for host in iplist:
+            r_ping = subprocess.run(['ping', '-c', '4', host], capture_output=True)
+            if r_ping.returncode == 0:
+                hostalive.append(host)
+        print("List of alive host: {}".format(hostalive))
+
 else:
     print("\n\n{}".format("#"*150))
