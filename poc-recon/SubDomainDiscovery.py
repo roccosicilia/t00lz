@@ -11,6 +11,10 @@ import json
 domain = sys.argv[1]
 mode = sys.argv[2]
 shodan_key = sys.argv[3]
+try:
+    option = sys.argv[4]
+except:
+    option = None
 
 ### function def
 def tabber50(string):
@@ -98,6 +102,14 @@ if "amass" in mode:   # search subdomain via DuckDuckGo
             i = i + 1
 
 ### print the content ###
-print("\n\n{}".format("#"*50))
+print("\n\n{}".format("#"*150))
 for element in content.values():
     print(element)
+print("{}".format("#"*150))
+
+### print the content ###
+if option != None:
+    print("\n\n{}".format("#"*150))
+    print(option)
+else:
+    print("\n\n{}".format("#"*150))
