@@ -42,6 +42,9 @@ if "amass" in mode:   # search subdomain via DuckDuckGo
     i = 0
     for subdomain in subdomains:
 
+        # preset
+        output = ''
+
         # gat domain info
         print("# Get domain info for {}".format(subdomain))
         try:
