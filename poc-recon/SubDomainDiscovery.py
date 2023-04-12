@@ -14,9 +14,15 @@ mode = sys.argv[2]
 shodan_key = sys.argv[3]
 
 ### function def
-def tabber(string):
+def tabber50(string):
     string_len = len(string)
     empty = 50 - string_len
+    tab = '-'*empty
+    return tab
+
+def tabber25(string):
+    string_len = len(string)
+    empty = 25 - string_len
     tab = '-'*empty
     return tab
 
@@ -36,14 +42,14 @@ if "amass" in mode:   # search subdomain via DuckDuckGo
 
             subdomain_ip = socket.gethostbyname(subdomain)
             subdomain_str = subdomain.decode("utf-8")
-            tab = tabber(subdomain_str)
+            tab = tabber50(subdomain_str)
             # print("| {} {} | {}\t|".format(subdomain_str, tab, subdomain_ip))
             output = "| {} {} | {}\t|".format(subdomain_str, tab, subdomain_ip)
 
         except:
 
             subdomain_str = subdomain.decode("utf-8")
-            tab = tabber(subdomain_str)
+            tab = tabber50(subdomain_str)
             # print("| {} {} | n/a \t\t|".format(subdomain_str, tab))
             output = "| {} {} | n/a \t\t|".format(subdomain_str, tab)
         
@@ -58,8 +64,18 @@ if "amass" in mode:   # search subdomain via DuckDuckGo
             #print("### DEBUG ### {}".format(shodan_result))
 
             shodan_json = json.loads(shodan_result.decode("utf-8"))
-            ports = shodan_json["ports"]
-            output = output + " {} |".format(ports)
+
+            org = shodan_json["data"]["org"]
+            org_tab = tabber25(org)
+            
+            asn = shodan_json["data"]["asn"]
+            asn_tab = tabber25(asn)
+
+            shodan_ports = shodan_json["ports"]
+            ports = ", ".join(shodan_ports[0:5])
+            ports_tab = tabber25(ports)
+
+            output = output + " {} {} | {} {} | {} {} |".format(asn, asn_tab, org, org_tab, ports, ports_tab)
             
             content[i] = output
             i = i + 1
