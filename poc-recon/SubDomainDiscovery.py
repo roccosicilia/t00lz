@@ -130,7 +130,6 @@ if option != None:
 
     # check for ICMP response
     if 'i' in option:
-        print("\n")
         hostalive = []
         for host in iplist:
             r_ping = subprocess.run(['ping', '-c', '4', host], capture_output=True)
@@ -140,7 +139,6 @@ if option != None:
     
     # check for PDF
     if 'D' in option:
-        print("\n")
         print("List of PDF for domains")
 
 else:
