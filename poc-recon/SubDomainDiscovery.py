@@ -60,9 +60,8 @@ if "amass" in mode:   # search subdomain via DuckDuckGo
         output = output + " {} |".format(ports)
         
         content[i] = output
-
+        i = i + 1
 
 ### print the content ###
-for row in content:
-    print(row)
+print(content)
 
