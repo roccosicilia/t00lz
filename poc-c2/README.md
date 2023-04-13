@@ -4,11 +4,10 @@ Based on my C2's research, this utility is a collection of command and control s
 
 Disclaimer: This software is provided as is and without any warranty. The user assumes full responsibility for any damages that may occur to third parties. This software is released for educational and research purposes only.
 
-# Usage
+# utility
 
-# Examples
+## drop.ps1
+...
 
-## raw commnads
-
-Get network confing:
-    ipconfig /a; 
+## ping.pong
+...
