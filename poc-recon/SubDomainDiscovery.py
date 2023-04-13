@@ -155,6 +155,9 @@ if option != None:
             "num": 500,
             "api_key": serpapi_key
         })
+        r_GoogleSearch = search.get_dict()
+        for result in r_GoogleSearch["organic_results"]:
+            print("\t{}: {}".format(result["title"], result["link"]))
 
 else:
     print("\n\n{}".format("#"*150))
