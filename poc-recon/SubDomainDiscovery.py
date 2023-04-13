@@ -7,9 +7,11 @@ import sys
 import subprocess
 import socket
 import json
+import configparser
+from serpapi import GoogleSearch
 
 ### mode and flag management
-if len(sys.argv) < 4:
+if len(sys.argv) < 3:
     print("Usage: python ./{} DomainName Mode ShodanKey [flags]".format(sys.argv[0]))
     print("Available Mode: amass")
     print("Flags:\n \
@@ -18,11 +20,16 @@ if len(sys.argv) < 4:
           \t -D: search PDF by Dorks")
     sys.exit()
 
+### args and configu
+config = configparser.RawConfigParser()
+config.read("SubDomainDiscovery.conf")
+shodan_key = config.get("key", "shodan_key")
+serpapi_key = config.get("key", "serpapi_key")
+
 domain = sys.argv[1]
 mode = sys.argv[2]
-shodan_key = sys.argv[3]
 try:
-    option = sys.argv[4]
+    option = sys.argv[3]
 except:
     option = None
 
@@ -44,6 +51,9 @@ def tabber15(string):
     empty = 15 - string_len
     tab = '-'*empty
     return tab
+
+def DuckDuck(dquery):
+    result = requests.get("")
 
 ### main program -- anass utility
 if "amass" in mode:   # search subdomain via DuckDuckGo
@@ -140,6 +150,11 @@ if option != None:
     # check for PDF
     if 'D' in option:
         print("List of PDF for domains")
+        search = GoogleSearch({
+            "q": "site:{} filetype:pdf",
+            "num": 500,
+            "api_key": serpapi_key
+        })
 
 else:
     print("\n\n{}".format("#"*150))
