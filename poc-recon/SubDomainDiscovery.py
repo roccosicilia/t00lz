@@ -17,7 +17,7 @@ if len(sys.argv) < 3:
     print("Flags:\n \
           \t -b: brute forcing domain\n \
           \t -i: check for alive hosts (ICMP)\n \
-          \t -D: search PDF by Dorks")
+          \t -D: search PDF by GoogleSearch API")
     sys.exit()
 
 ### args and configu
@@ -147,11 +147,11 @@ if option != None:
                 hostalive.append(host)
         print("List of alive host: {}".format(hostalive))
     
-    # check for PDF
+    # PDF search
     if 'D' in option:
         print("List of PDF for domains")
         search = GoogleSearch({
-            "q": "site:{} filetype:pdf",
+            "q": "site:{} filetype:pdf".format(domain),
             "num": 500,
             "api_key": serpapi_key
         })
