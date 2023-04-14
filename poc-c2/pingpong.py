@@ -13,7 +13,9 @@ def read(packet):
             print(data)
         elif source_os == 'win':
             data = packet[ICMP].load
-            print("Size: {}".format(len(data)))
+            if data not in read.packets_seen:
+                read.packets_seen.add(data)
+                print("Size: {}".format(len(data)))
     else:
         print("No ICMP packets")
 
