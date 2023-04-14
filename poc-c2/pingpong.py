@@ -3,6 +3,7 @@ import string
 import sys
 
 # var
+packets_seen = set()
 source_os = sys.argv[1]
 
 def read(packet):
@@ -13,8 +14,8 @@ def read(packet):
             print(data)
         elif source_os == 'win':
             data = packet[ICMP].load
-            if data not in read.packets_seen:
-                read.packets_seen.add(data)
+            if data not in packets_seen:
+                packets_seen.add(data)
                 print("Size: {}".format(len(data)))
     else:
         print("No ICMP packets")
