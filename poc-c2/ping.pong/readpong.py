@@ -13,4 +13,4 @@ while val:
         print("file change")
         last_status_t = file_status_t
     else:
-        print("...")
+        print(file_status.st_ctime)
