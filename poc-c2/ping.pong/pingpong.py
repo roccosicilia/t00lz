@@ -18,7 +18,10 @@ def read(packet):
             #if data not in packets_seen:
             packets_seen.add(data)
             # print("Size: {}".format(len(data)))
-            message.append(len(data))
+            if (len(data) == 1):
+                message.clear()
+            else:
+                message.append(len(data))
     else:
         print("No ICMP packets")
     
