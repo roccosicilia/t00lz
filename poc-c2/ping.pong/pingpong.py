@@ -22,7 +22,7 @@ def read(packet):
             # print("Size: {}".format(len(data)))
             if (len(data) == 1):
                 message.clear()
-                file = open("./stream.txt", "a")
+                file = open("./stream.txt", "w")
                 # file.write("\n-----\n")
                 file.close()
             else:
