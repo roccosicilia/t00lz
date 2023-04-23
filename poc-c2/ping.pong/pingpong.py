@@ -20,22 +20,16 @@ def read(packet):
             #if data not in packets_seen:
             #packets_seen.add(data)
             # print("Size: {}".format(len(data)))
-            '''
+            
             if (len(data) == 1):
                 message.clear()
                 file = open("./stream.txt", "a")
-                # file.write("\n-----\n")
                 file.close()
             else:
                 message.append(len(data))
                 file = open("./stream.txt", "a")
                 file.write("{}, ".format(len(data)))
                 file.close()
-            '''
-            message.append(len(data))
-            file = open("./stream.txt", "a")
-            file.write("{}, ".format(len(data)))
-            file.close()
     else:
         print("No ICMP packets")
     
