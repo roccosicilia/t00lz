@@ -4,7 +4,7 @@ import sys
 import time
 
 # var
-packets_seen = set()
+# packets_seen = set()
 source_os = sys.argv[1]
 message = []
 
@@ -18,7 +18,7 @@ def read(packet):
         elif source_os == 'win':
             data = packet[ICMP].load
             #if data not in packets_seen:
-            packets_seen.add(data)
+            #packets_seen.add(data)
             # print("Size: {}".format(len(data)))
             if (len(data) == 1):
                 message.clear()
