@@ -22,9 +22,12 @@ def read(packet):
                 message.clear()
             else:
                 message.append(len(data))
+                file = open("./stream.txt", "a")
+                file.write(message)
+                file.close()
     else:
         print("No ICMP packets")
     
-    print(message)
+
 
 sniff(filter="icmp", prn=read)
