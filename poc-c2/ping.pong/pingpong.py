@@ -1,6 +1,7 @@
 from scapy.all import *
 import string
 import sys
+import time
 
 # var
 packets_seen = set()
@@ -8,6 +9,7 @@ source_os = sys.argv[1]
 message = []
 
 def read(packet):
+    filenale = time.strftime("%Y%m%d-%H%M")
     if packet.haslayer(ICMP):
         # check OS
         if source_os == 'unix':
@@ -28,7 +30,7 @@ def read(packet):
     else:
         print("No ICMP packets")
     
-    # debug
+    # debug message
     print(message)
 
 sniff(filter="icmp", prn=read)
