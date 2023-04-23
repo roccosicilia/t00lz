@@ -5,6 +5,7 @@ import sys
 # var
 packets_seen = set()
 source_os = sys.argv[1]
+message = []
 
 def read(packet):
     if packet.haslayer(ICMP):
@@ -16,8 +17,11 @@ def read(packet):
             data = packet[ICMP].load
             #if data not in packets_seen:
             packets_seen.add(data)
-            print("Size: {}".format(len(data[0])))
+            # print("Size: {}".format(len(data)))
+            message.append(len(data))
     else:
         print("No ICMP packets")
+    
+    print(message)
 
 sniff(filter="icmp", prn=read)
