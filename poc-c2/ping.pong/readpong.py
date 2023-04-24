@@ -26,7 +26,8 @@ if __name__ == '__main__':
     for line in loglines:
         # print(line)
         message_array = line.split(", ")
-        message_array = message_array[::4]  # 1/4 elements
+        #message_array = message_array[::4]  # 1/4 elements
+        message_array = message_array[::6]  # 1/6 elements
         message_b64 = []
         for element in message_array:
             message_b64.append(chr(int(element)))
