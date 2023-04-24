@@ -6,7 +6,7 @@ import subprocess
 import select
 
 # var
-filename = "./stream.txt"
+filename = "/home/sheliak/Labz/my-papers/poc-c2/ping.pong/stream.txt"
 
 '''
 last_status_t = int(time.time())
@@ -30,4 +30,3 @@ while True:
         time.sleep(0.1)
         continue
     print(line.rstrip())
-    
