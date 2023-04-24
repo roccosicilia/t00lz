@@ -31,8 +31,8 @@ while True:
         time.sleep(5)
         print("...")
     print(line.rstrip())
-'''
 
+# Test 3
 tailp = os.popen("tail -f {}".format(file))     # tail
 
 output = select.poll()                          # read tail output
@@ -45,4 +45,24 @@ while True:
             print(line)
     else:
         print("...")
+'''
 
+def mytail(file):
+    file.seek(0, os.SEEK_END)
+    while True:
+        # read last line of file
+        line = file.readline()
+        # sleep if file hasn't been updated
+        if not line:
+            time.sleep(500)
+            continue
+        yield line
+
+if __name__ == '__main__':
+    
+    logfile = open(file,"r")
+    loglines = mytail(logfile)
+    # iterate over the generator
+    for line in loglines:
+        print(line)
+        
