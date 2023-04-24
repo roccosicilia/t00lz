@@ -24,4 +24,7 @@ if __name__ == '__main__':
     loglines = mytail(logfile)
     # iterate over the generator
     for line in loglines:
-        print(line)
+        # print(line)
+        message_array = line.split(", ")
+        for element in message_array:
+            print(element)
