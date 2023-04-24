@@ -22,11 +22,12 @@ while val:
         print(file_status.st_ctime, last_status_t)
 '''
 
-file_r = subprocess.Popen(["tail", "-f", filename], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-poll = select.poll()
-poll.register(file_r.stdout)
+tailprocess = subprocess.Popen(["tail", "-f", filename], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
 while True:
-    if poll.poll(1):
-        print(file_r.stdout.readline())
-    time.sleep(1)
+    line = tailprocess.stdout.readline().decode('utf-8')
+    if line == '':
+        time.sleep(0.1)
+        continue
+    print(line.rstrip())
+    
