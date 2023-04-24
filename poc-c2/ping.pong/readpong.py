@@ -29,6 +29,6 @@ if __name__ == '__main__':
         message_array = message_array[::4]  # 1/4 elements
         message_b64 = []
         for element in message_array:
-            message_b64.append(chr(element))
+            message_b64.append(chr(int(element)))
         message = ''.join(message_b64)
         print(message)
