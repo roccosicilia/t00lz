@@ -32,7 +32,10 @@ if __name__ == '__main__':
         for element in message_array:
             message_b64.append(chr(int(element)))
         message = ''.join(message_b64)
-        base64_bytes = message.encode('ascii')
-        message_bytes = base64.b64decode(base64_bytes)
-        message = message_bytes.decode('ascii')
-        print(message)
+        try:
+            base64_bytes = message.encode('ascii')
+            message_bytes = base64.b64decode(base64_bytes)
+            message = message_bytes.decode('ascii')
+            print(message)
+        except:
+            print("Encoding error!")
