@@ -27,6 +27,6 @@ tailprocess = subprocess.Popen(["tail", "-f", filename], stdout=subprocess.PIPE,
 while True:
     line = tailprocess.stdout.readline().decode('utf-8')
     if line == '':
-        time.sleep(0.1)
-        continue
+        time.sleep(5)
+        print("...")
     print(line.rstrip())
