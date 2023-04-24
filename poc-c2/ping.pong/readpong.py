@@ -1,6 +1,6 @@
 
 import time
-import os, sys
+import os, sys, base64
 import platform
 import subprocess
 import select
@@ -32,4 +32,5 @@ if __name__ == '__main__':
         for element in message_array:
             message_b64.append(chr(int(element)))
         message = ''.join(message_b64)
+        message = str.decode('base64', message)
         print(message)
