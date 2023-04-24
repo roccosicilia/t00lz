@@ -26,5 +26,7 @@ if __name__ == '__main__':
     for line in loglines:
         # print(line)
         message_array = line.split(", ")
+        message = ''
         for element in message_array:
-            print(element)
+            message.append(element)
+        print(message)
