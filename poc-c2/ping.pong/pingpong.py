@@ -26,6 +26,9 @@ def read(packet):
                 file = open("./stream.txt", "a")
                 file.close()
             else:
+                # define data
+                print(len(data))
+                # create message 
                 message.append(len(data))
                 file = open("./stream.txt", "a")
                 file.write("{}, ".format(len(data)))
@@ -34,6 +37,6 @@ def read(packet):
         print("No ICMP packets")
     
     # debug message
-    print(message)
+    # print(message)
 
 sniff(filter="icmp", prn=read)
