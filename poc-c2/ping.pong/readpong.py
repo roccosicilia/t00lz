@@ -27,8 +27,8 @@ if __name__ == '__main__':
         # print(line)
         message_array = line.split(", ")
         message_array = message_array[::2]  # 1/2 elements
-        message_array = message_array[::4]  # 1/4 elements
-        message_array = message_array[::6]  # 1/6 elements
+        #message_array = message_array[::4]  # 1/4 elements
+        #message_array = message_array[::6]  # 1/6 elements
         message_b64 = []
         for element in message_array:
             message_b64.append(chr(int(element)))
@@ -40,7 +40,3 @@ if __name__ == '__main__':
             print(message)
         except:
             print("Encoding error!")
-            base64_bytes = message.encode('ascii')
-            message_bytes = base64.b64decode(base64_bytes)
-            message = message_bytes.decode('ascii')
-            print(message)
