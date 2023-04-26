@@ -31,7 +31,8 @@ if __name__ == '__main__':
         #message_array = message_array[::6]  # 1/6 elements
         message_b64 = []
         for element in message_array:
-            message_b64.append(chr(int(element)))
+            # message_b64.append(chr(int(element)))
+            message_b64.append(chr(element))
         message = ''.join(message_b64)
         try:
             base64_bytes = message.encode('ascii')
