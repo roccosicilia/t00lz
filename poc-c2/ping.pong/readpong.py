@@ -40,3 +40,7 @@ if __name__ == '__main__':
             print(message)
         except:
             print("Encoding error!")
+            base64_bytes = message.encode('ascii')
+            message_bytes = base64.b64decode(base64_bytes)
+            message = message_bytes.decode('ascii')
+            print(message)
