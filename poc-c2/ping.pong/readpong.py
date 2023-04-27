@@ -14,7 +14,7 @@ def mytail(file):
         line = file.readline()
         # sleep if file hasn't been updated
         if not line:
-            time.sleep(20)
+            time.sleep(60)
             continue
         yield line
 
@@ -44,3 +44,6 @@ if __name__ == '__main__':
             print(message)
         except:
             print("Encoding error!")
+            base64_bytes = message.encode('ascii')
+            message_bytes = base64.b64decode(base64_bytes)
+            message = message_bytes.decode('ascii')
