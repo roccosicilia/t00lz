@@ -6,6 +6,7 @@ import time
 # var
 # packets_seen = set()
 source_os = sys.argv[1]
+destination = sys.argv[2]
 message = []
 
 def read(packet):
@@ -39,4 +40,4 @@ def read(packet):
     # debug message
     # print(message)
 
-sniff(filter="icmp", prn=read)
+sniff(filter="dst host {} and icmp".format(destination), prn=read)
