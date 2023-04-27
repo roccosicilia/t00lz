@@ -25,6 +25,7 @@ def read(packet):
             if (len(data) == 1):
                 message.clear()
                 file = open("./stream.txt", "a")
+                file.write("\n")
                 file.close()
             else:
                 # define data
