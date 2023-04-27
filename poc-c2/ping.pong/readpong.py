@@ -14,7 +14,7 @@ def mytail(file):
         line = file.readline()
         # sleep if file hasn't been updated
         if not line:
-            time.sleep(45)
+            time.sleep(20)
             continue
         yield line
 
