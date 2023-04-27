@@ -31,7 +31,10 @@ if __name__ == '__main__':
         #message_array = message_array[::6]  # 1/6 elements
         message_b64 = []
         for element in message_array:
-            message_b64.append(chr(int(element)))
+            try:
+                message_b64.append(chr(int(element)))
+            except:
+                message_b64.append('')
             # message_b64.append(chr(element))
         message = ''.join(message_b64)
         try:
