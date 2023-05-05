@@ -11,3 +11,4 @@ Disclaimer: This software is provided as is and without any warranty. The user a
 
 ## ping.pong
 ...
+Ipotesi C2: ping con dimensione fissa per richiedere comando al server, risposte con messaggio da server modificando dimensione buffer
