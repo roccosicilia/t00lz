@@ -63,12 +63,12 @@ def start_server():
                     # error message
                     error_message = "Connection closed.\n"
                     conn.sendall(error_message.encode())
-                    log_message(f"[{formatted_datetime}] - Connection closed: to many attempts. \n")
+                    log_message(f"[{formatted_datetime}] - {addr[0]}:{addr[1]} - Connection closed: to many attempts. \n")
                     break
                 att += 1
 
             except:
-                log_message(f"[{formatted_datetime}] - Error: scan attempt or malformed data. \n")
+                log_message(f"[{formatted_datetime}] - {addr[0]}:{addr[1]} - Error: scan attempt or malformed data. \n")
                 break
 
         conn.close()
