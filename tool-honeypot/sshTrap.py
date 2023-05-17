@@ -10,7 +10,7 @@ def log_message(message):
 
 def start_server():
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server_socket.bind(('localhost', 8888))
+    server_socket.bind((server_ip, 8888))
     server_socket.listen(1)
     print("In attesa di connessioni...")
 
