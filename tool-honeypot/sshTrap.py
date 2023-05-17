@@ -19,7 +19,7 @@ def start_server():
         print(f"Connessione accettata da {addr[0]}:{addr[1]}")
 
         while True:
-            data = conn.recv(1024).decode()
+            data = conn.recv(10240).decode()
             if not data:
                 break
 
