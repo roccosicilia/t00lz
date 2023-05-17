@@ -48,7 +48,7 @@ def start_server():
                 # insert password
                 password_message = "Password: "
                 conn.sendall(password_message.encode())
-                password = getpass(conn.recv(4096).decode())
+                password = conn.recv(4096).decode()
                 if password == 'stopit':
                     break
 
