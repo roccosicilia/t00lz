@@ -4,7 +4,7 @@ from datetime import datetime
 
 dir = os.path.dirname(os.path.abspath(__name__))
 server_ip = '172.25.82.136'  ## use your server ip
-company_name = "CONTOSO.GOV"
+company_name = "CONTOSO Inc."
 
 def log_message(message):
     with open(f"{dir}/logs/log.txt", "a") as log_file:
