@@ -1,7 +1,6 @@
 import socket
 import os
 from datetime import datetime
-import getpass
 
 dir = os.path.dirname(os.path.abspath(__name__))
 server_ip = '172.25.82.136'  ## use your server ip
@@ -60,7 +59,7 @@ def start_server():
                 conn.sendall(error_message.encode())
 
             except:
-                print("Errore durante l'elaborazione dei dati")
+                log_message(f"[{formatted_datetime}] - Error: scan attempt or malformed data.")
 
             # attempts counter
             if att > 3:
