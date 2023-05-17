@@ -20,12 +20,16 @@ def start_server():
         conn, addr = server_socket.accept()
         print(f"Connessione accettata da {addr[0]}:{addr[1]}")
 
-        # user request
+        while True:
+            data = conn.recv(1024).decode()
+            if not data:
+                break
+            
+            print(f"Dato ricevuto: {data}")
 
-        data = conn.recv(1024).decode()
-        print(f"Dato ricevuto: {data}")
+            response = process_data(data)
+            conn.sendall(response.encode())
 
-        response = process_data(data)
-        conn.sendall(response.encode())
+        conn.close()
 
 start_server()
