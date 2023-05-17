@@ -24,49 +24,49 @@ def start_server():
         att = 1
 
         while True:
-            #try:
-            # base data
-            now = datetime.now()
-            formatted_datetime = now.strftime("%Y/%m/%d %H:%M:%S")
+            try:
+                # base data
+                now = datetime.now()
+                formatted_datetime = now.strftime("%Y/%m/%d %H:%M:%S")
 
-            # login message
-            login_message  = ""
-            login_message += "/********************************************************************************/"
-            login_message += "/* Authorized access only!                                                      */"
-            login_message += "/* If you are not authorized to access or use this system, disconnect now!      */"
-            login_message += "/********************************************************************************/"
-            login_message += ""
-            login_message += "Username: "
-            conn.sendall(login_message.encode())
+                # login message
+                login_message  = "\n"
+                login_message += "/********************************************************************************/\n"
+                login_message += "/* Authorized access only!                                                      */\n"
+                login_message += "/* If you are not authorized to access or use this system, disconnect now!      */\n"
+                login_message += "/********************************************************************************/\n"
+                login_message += "\n"
+                login_message += "Username: "
+                conn.sendall(login_message.encode())
 
-            # insert username
-            login = conn.recv(4096).decode()
-            if login == 'stopit':
-                break
+                # insert username
+                login = conn.recv(4096).decode()
+                if login == 'stopit':
+                    break
 
-            # insert password
-            password_message = "Password: "
-            conn.sendall(password_message.encode())
-            password = conn.recv(4096).decode()
-            if password == 'stopit':
-                break
+                # insert password
+                password_message = "Password: "
+                conn.sendall(password_message.encode())
+                password = conn.recv(4096).decode()
+                if password == 'stopit':
+                    break
 
-            # logging
-            log_message(f"[{formatted_datetime}] - {addr[0]}:{addr[1]} - Login attempt for user {login} and password {password}")
+                # logging
+                log_message(f"[{formatted_datetime}] - {addr[0]}:{addr[1]} - Login attempt for user {login.strip()} and password {password.strip()}")
 
-            # error message
-            error_message = "Invalid credentials.\n"
-            conn.sendall(error_message.encode())
+                # error message
+                error_message = "Invalid credentials.\n"
+                conn.sendall(error_message.encode())
 
-            #except:
-                #print("Errore durante l'elaborazione dei dati")
+            except:
+                print("Errore durante l'elaborazione dei dati")
 
             # attempts counter
             if att > 3:
                 # error message
                 error_message = "Connection closed.\n"
                 conn.sendall(error_message.encode())
-                log_message(f"[{formatted_datetime}] - Close connection: to many tentative")
+                log_message(f"[{formatted_datetime}] - Connection closed. To many attempts")
                 break
             att += 1
 
