@@ -58,17 +58,17 @@ def start_server():
                 error_message = "Invalid credentials.\n"
                 conn.sendall(error_message.encode())
 
-            except:
-                log_message(f"[{formatted_datetime}] - Error: scan attempt or malformed data.")
+                # attempts counter
+                if att > 3:
+                    # error message
+                    error_message = "Connection closed.\n"
+                    conn.sendall(error_message.encode())
+                    log_message(f"[{formatted_datetime}] - Connection closed: to many attempts. \n")
+                    break
+                att += 1
 
-            # attempts counter
-            if att > 3:
-                # error message
-                error_message = "Connection closed.\n"
-                conn.sendall(error_message.encode())
-                log_message(f"[{formatted_datetime}] - Connection closed. To many attempts")
-                break
-            att += 1
+            except:
+                log_message(f"[{formatted_datetime}] - Error: scan attempt or malformed data. \n")
 
         conn.close()
 
