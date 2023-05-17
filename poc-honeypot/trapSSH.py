@@ -1,16 +1,17 @@
-import socket
-import os
+import socket, os, sys, syslog
 from datetime import datetime
 
 dir = os.path.dirname(os.path.abspath(__name__))
-server_ip = '172.25.82.136'  ## use your server ip
-company_name = "CONTOSO Inc."
+facility = syslog.LOG_LOCAL7
+server_ip = sys.argv[1]
+company_name = sys.argv[2]
 
 def log_message(message):
     with open(f"{dir}/logs/log.txt", "a") as log_file:
         log_file.write(message)
 
 def start_server():
+    syslog.syslog(facility | syslog.LOG_INFO, "SSH Honeypot started.")
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_socket.bind((server_ip, 2222))
     server_socket.listen(1)
@@ -18,7 +19,8 @@ def start_server():
 
     while True:
         conn, addr = server_socket.accept()
-        print(f"Connessione accettata da {addr[0]}:{addr[1]}")
+        print(f"New connection from {addr[0]}:{addr[1]} to SSH Honeypot.")
+        syslog.syslog(facility | syslog.LOG_INFO, f"New connection from {addr[0]}:{addr[1]} to SSH Honeypot.")
 
          # attempts counter
         att = 1
@@ -52,7 +54,8 @@ def start_server():
                     break
 
                 # logging
-                log_message(f"[{formatted_datetime}] - {addr[0]}:{addr[1]} - Login attempt for user {login.strip()} and password {password.strip()} \n")
+                log_message(f"[{formatted_datetime}] - Login attempt from {addr[0]}:{addr[1]} for user {login.strip()} and password {password.strip()}.\n")
+                syslog.syslog(facility | syslog.LOG_INFO, f"Login attempt from {addr[0]}:{addr[1]} for user {login.strip()} and password {password.strip()}.")
 
                 # error message
                 error_message = "Invalid credentials.\n"
@@ -63,12 +66,14 @@ def start_server():
                     # error message
                     error_message = "Connection closed.\n"
                     conn.sendall(error_message.encode())
-                    log_message(f"[{formatted_datetime}] - {addr[0]}:{addr[1]} - Connection closed: to many attempts. \n")
+                    log_message(f"[{formatted_datetime}] - Connection closed for {addr[0]}:{addr[1]}: to many attempts. \n")
+                    syslog.syslog(facility | syslog.LOG_INFO, f"Connection closed for {addr[0]}:{addr[1]}: to many attempts.")
                     break
                 att += 1
 
             except:
-                log_message(f"[{formatted_datetime}] - {addr[0]}:{addr[1]} - Error: scan attempt or malformed data. \n")
+                log_message(f"[{formatted_datetime}] - Error: scan attempt or malformed data from {addr[0]}:{addr[1]}. \n")
+                syslog.syslog(facility | syslog.LOG_INFO, f"Error: scan attempt or malformed data from {addr[0]}:{addr[1]}.")
                 break
 
         conn.close()
