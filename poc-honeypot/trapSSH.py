@@ -15,7 +15,7 @@ def start_server():
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_socket.bind((server_ip, 2222))
     server_socket.listen(1)
-    print("In attesa di connessioni...")
+    print("Listening...")
 
     while True:
         conn, addr = server_socket.accept()
