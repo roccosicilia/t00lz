@@ -24,6 +24,8 @@ def start_server():
                 break
 
             log_message(data)
+            http_resp = '<h1>UP!</h1>'
+            conn.sendall(http_resp.encode())
 
         conn.close()
 
