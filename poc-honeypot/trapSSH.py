@@ -69,6 +69,7 @@ def start_server():
 
             except:
                 log_message(f"[{formatted_datetime}] - Error: scan attempt or malformed data. \n")
+                break
 
         conn.close()
 
