@@ -19,13 +19,16 @@ def start_server():
         print(f"Connessione accettata da {addr[0]}:{addr[1]}")
 
         while True:
-            data = conn.recv(10240).decode()
-            if not data:
-                break
+            try:
+                data = conn.recv(102400).decode()
+                if not data:
+                    break
 
-            log_message(data)
-            http_resp = '<h1>UP!</h1>'
-            conn.sendall(http_resp.encode())
+                log_message(data)
+                http_resp = '<h1>UP!</h1>'
+                conn.sendall(http_resp.encode())
+            except:
+                print("Errore durante l'elaborazione dei dati")
 
         conn.close()
 
