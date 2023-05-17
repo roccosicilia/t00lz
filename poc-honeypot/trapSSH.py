@@ -1,6 +1,7 @@
 import socket
 import os
 from datetime import datetime
+import getpass
 
 dir = os.path.dirname(os.path.abspath(__name__))
 server_ip = '172.25.82.136'  ## use your server ip
@@ -47,12 +48,12 @@ def start_server():
                 # insert password
                 password_message = "Password: "
                 conn.sendall(password_message.encode())
-                password = conn.recv(4096).decode()
+                password = getpass(conn.recv(4096).decode())
                 if password == 'stopit':
                     break
 
                 # logging
-                log_message(f"[{formatted_datetime}] - {addr[0]}:{addr[1]} - Login attempt for user {login.strip()} and password {password.strip()}")
+                log_message(f"[{formatted_datetime}] - {addr[0]}:{addr[1]} - Login attempt for user {login.strip()} and password {password.strip()} \n")
 
                 # error message
                 error_message = "Invalid credentials.\n"
