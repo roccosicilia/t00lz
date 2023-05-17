@@ -4,15 +4,13 @@ import os
 dir = os.path.dirname(os.path.abspath(__name__))
 server_ip = '172.25.82.136'  ## use your server ip
 
-def process_data(data):
-    if data == "5":
-        return "grazie"
-    else:
-        return "Dato non valido"
+def log_message(message):
+    with open("log.txt", "a") as log_file:
+        log_file.write(message + "\n")
 
 def start_server():
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server_socket.bind((server_ip, 2222))
+    server_socket.bind(('localhost', 8888))
     server_socket.listen(1)
     print("In attesa di connessioni...")
 
@@ -24,11 +22,8 @@ def start_server():
             data = conn.recv(1024).decode()
             if not data:
                 break
-            
-            print(f"Dato ricevuto: {data}")
 
-            response = process_data(data)
-            conn.sendall(response.encode())
+            log_message(data)
 
         conn.close()
 
