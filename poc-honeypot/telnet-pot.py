@@ -3,24 +3,26 @@ from datetime import datetime
 
 dir = os.path.dirname(os.path.abspath(__name__))
 facility = syslog.LOG_LOCAL7
-server_ip = sys.argv[1]
-company_name = sys.argv[2]
+try:
+    server_ip = sys.argv[1]
+except:
+    server_ip = 'localhost'
 
 def log_message(message):
     with open(f"{dir}/logs/log.txt", "a") as log_file:
         log_file.write(message)
 
 def start_server():
-    syslog.syslog(facility | syslog.LOG_INFO, "SSH Honeypot started.")
+    syslog.syslog(facility | syslog.LOG_INFO, "TELNET Honeypot started.")
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server_socket.bind((server_ip, 2222))
+    server_socket.bind((server_ip, 23))
     server_socket.listen(1)
     print("Listening...")
 
     while True:
         conn, addr = server_socket.accept()
-        print(f"New connection from {addr[0]}:{addr[1]} to SSH Honeypot.")
-        syslog.syslog(facility | syslog.LOG_INFO, f"New connection from {addr[0]}:{addr[1]} to SSH Honeypot.")
+        print(f"New connection from {addr[0]}:{addr[1]} to TELNET Honeypot.")
+        syslog.syslog(facility | syslog.LOG_INFO, f"New connection from {addr[0]}:{addr[1]} to TELNET Honeypot.")
 
          # attempts counter
         att = 1
