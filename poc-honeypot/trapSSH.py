@@ -30,8 +30,8 @@ def start_server():
             formatted_datetime = now.strftime("%Y/%m/%d %H:%M:%S")
 
             # login message
-            login_message += ""
-            login_message  = "/********************************************************************************/"
+            login_message  = ""
+            login_message += "/********************************************************************************/"
             login_message += "/* Authorized access only!                                                      */"
             login_message += "/* If you are not authorized to access or use this system, disconnect now!      */"
             login_message += "/********************************************************************************/"
