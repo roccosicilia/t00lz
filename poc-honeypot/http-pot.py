@@ -3,10 +3,12 @@ from datetime import datetime
 
 dir = os.path.dirname(os.path.abspath(__name__))
 facility = syslog.LOG_LOCAL7
+server_port = 8080
 try:
     server_ip = sys.argv[1]
 except:
     server_ip = 'localhost'
+
 
 def log_message(message):
     with open(f"{dir}/logs/log.txt", "a") as log_file:
@@ -15,9 +17,9 @@ def log_message(message):
 def start_server():
     syslog.syslog(facility | syslog.LOG_INFO, "HTTP Honeypot started.")
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server_socket.bind((server_ip, 8080))
+    server_socket.bind((server_ip, server_port))
     server_socket.listen(1)
-    print("Listening...")
+    print("Listening on {}:{}...".format(server_ip, server_port))
 
     while True:
         conn, addr = server_socket.accept()
