@@ -35,6 +35,8 @@ def start_server():
                 log_message(f"[{formatted_datetime}] - [{client_request}]\n")
                 syslog.syslog(facility | syslog.LOG_INFO, f"[{formatted_datetime}] - [{client_request}]")
 
+                http_data = client_request
+
                 # http message
                 html_content  = "HTTP/1.1 200 OK\r\n"
                 html_content += "Content-Type: text/html\r\n"
@@ -46,8 +48,10 @@ def start_server():
                 html_content += "</head>\r\n"
                 html_content += "<body>\r\n"
                 html_content += "<h1>Benvenuto nel server HTTP!</h1>\r\n"
+                html_content += "{}\r\n".format(http_data)
                 html_content += "</body>\r\n"
                 html_content += "</html>\r\n"
+
                 conn.sendall(html_content.encode("utf-8"))
                 conn.close()
 
