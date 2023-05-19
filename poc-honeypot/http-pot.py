@@ -49,10 +49,12 @@ def start_server():
                 html_content += "</body>\r\n"
                 html_content += "</html>\r\n"
                 conn.sendall(html_content.encode("utf-8"))
+                conn.close()
 
             except:
                 log_message(f"[{formatted_datetime}] - Error: scan attempt or malformed data from {addr[0]}:{addr[1]}. \n")
                 syslog.syslog(facility | syslog.LOG_INFO, f"Error: scan attempt or malformed data from {addr[0]}:{addr[1]}.")
                 break
+        
 
 start_server()
