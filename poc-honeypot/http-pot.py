@@ -26,37 +26,33 @@ def start_server():
         print(f"New connection from {addr[0]}:{addr[1]} to HTTP Honeypot.")
         syslog.syslog(facility | syslog.LOG_INFO, f"New connection from {addr[0]}:{addr[1]} to HTTP Honeypot.")
 
-         # attempts counter
-        att = 1
-
         while True:
             try:
                 # base data
                 now = datetime.now()
                 formatted_datetime = now.strftime("%Y/%m/%d %H:%M:%S")
-                client_request = conn.recv(4096).decode()
+                client_request = conn.recv(4096).decode("utf-8")
                 log_message(f"[{formatted_datetime}] - [{client_request}]\n")
                 syslog.syslog(facility | syslog.LOG_INFO, f"[{formatted_datetime}] - [{client_request}]")
 
                 # http message
-                html_content  = "HTTP/1.1 200 OK\n"
-                html_content += "Content-Type: text/html\n"
-                html_content += "<!DOCTYPE html>\n"
-                html_content += "<html>\n"
-                html_content += "<head>\n"
-                html_content += "   <title>Server HTTP</title>\n"
-                html_content += "</head>\n"
-                html_content += "<body>\n"
-                html_content += "<h1>Benvenuto nel server HTTP!</h1>\n"
-                html_content += "</body>\n"
-                html_content += "</html>\n"
-                conn.sendall(html_content.encode())
+                html_content  = "HTTP/1.1 200 OK\r\n"
+                html_content += "Content-Type: text/html\r\n"
+                html_content += "\r\n"
+                html_content += "<!DOCTYPE html>\r\n"
+                html_content += "<html>\r\n"
+                html_content += "<head>\r\n"
+                html_content += "<title>Server HTTP</title>\r\n"
+                html_content += "</head>\r\n"
+                html_content += "<body>\r\n"
+                html_content += "<h1>Benvenuto nel server HTTP!</h1>\r\n"
+                html_content += "</body>\r\n"
+                html_content += "</html>\r\n"
+                conn.sendall(html_content.encode("utf-8"))
 
             except:
                 log_message(f"[{formatted_datetime}] - Error: scan attempt or malformed data from {addr[0]}:{addr[1]}. \n")
                 syslog.syslog(facility | syslog.LOG_INFO, f"Error: scan attempt or malformed data from {addr[0]}:{addr[1]}.")
                 break
-
-        conn.close()
 
 start_server()
