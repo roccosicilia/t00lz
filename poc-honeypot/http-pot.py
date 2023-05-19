@@ -47,8 +47,13 @@ def start_server():
                 html_content += "<title>Server HTTP</title>\r\n"
                 html_content += "</head>\r\n"
                 html_content += "<body>\r\n"
-                html_content += "<h1>Benvenuto nel server HTTP!</h1>\r\n"
-                html_content += "{}\r\n".format(http_data[0])
+
+                if (http_data[0] == 'GET /index.html HTTP/1.1'):
+                    html_content += "<h1>Benvenuto nel server HTTP!</h1>\r\n"
+                    html_content += "{}\r\n".format(http_data[0])
+                else:
+                    html_content += "<h1>404</h1>\r\n"
+                    html_content += "{}\r\n".format(http_data[0])
                 html_content += "</body>\r\n"
                 html_content += "</html>\r\n"
 
@@ -60,5 +65,4 @@ def start_server():
                 syslog.syslog(facility | syslog.LOG_INFO, f"Error: scan attempt or malformed data from {addr[0]}:{addr[1]}.")
                 break
         
-
 start_server()
